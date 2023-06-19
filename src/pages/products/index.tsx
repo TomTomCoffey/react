@@ -1,9 +1,12 @@
+import { useSession } from "@/models/session";
 import { useState } from "react";
 import { Box, Button, Form} from "react-bulma-components";
 
 
 
 export default function patientData() {
+
+  const session = useSession();
 
   
   const [patientName, setPatientName] = useState("");
@@ -28,6 +31,7 @@ export default function patientData() {
   };
 
   console.log(data);
+ 
 
   };
 

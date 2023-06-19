@@ -3,24 +3,15 @@ import { Bill } from "./bills";
 
 
 
-const session = reactive({
+const session = {
     user: null as User | null,
-    isLoading: false,
-    messages: [] as {
-        msg: string,
-        type: "success" | "danger" | "warning" | "info",
-    }[],
-    
-})
+}
 
 export function useSession() {
     return session;
 }
 
 
-function reactive(arg0: { user: any; isLoading: boolean; messages: { msg: string; type: "success" | "danger" | "warning" | "info"; }[]; }) {
-    throw new Error("Function not implemented.");
-}
 
 export interface User{
     id: number,
@@ -30,6 +21,43 @@ export interface User{
     bills: Bill[],
 
 }
+
+export function login(user: User) {
+    session.user = users[0];
+
+    }
+
+export function logout() {
+    session.user = null;
+}
+
+const users: User[] = [
+    {
+       id: 1,
+        name: "John Doe",
+        email: "John@doe.com",
+        password: "1234321",
+        bills: []
+       
+    }
+
+]
+
+
+
+
+  export function addBill(bill: Bill) {
+    session.user!.bills.push(bill);
+  }
+
+    export function deleteBill(bill: Bill) {
+    const index = session.user!.bills.indexOf(bill);
+    session.user!.bills.splice(index, 1);
+    }
+
+
+
+
 
 
 

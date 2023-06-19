@@ -8,7 +8,7 @@ export interface Bill{
     hospitalName: string,
     dateOfService: string,
     amount: string,
-    bill: string,
+    bill: File,
 
 
 }
