@@ -47,7 +47,7 @@ export default function patientData() {
 
 
   }
-   Router.push("/");
+   Router.push("/summary");
 
   };
 
