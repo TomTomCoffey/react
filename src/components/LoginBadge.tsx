@@ -1,7 +1,6 @@
-import { login, logout, useSession, users } from "@/models/session";
+import { login, logout, useSession } from "@/models/session";
+import { useState } from "react";
 import { Button } from "react-bulma-components";
-
-
 
 
 
@@ -9,7 +8,10 @@ export default function loginBadge(){
 
     const session = useSession();
 
+
+
 if(!session.user){
+    
     return(
         <>
         <Button color="info" onClick={login}>Login</Button>
