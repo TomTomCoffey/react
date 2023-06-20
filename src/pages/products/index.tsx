@@ -1,6 +1,7 @@
 import { useSession } from "@/models/session";
 import { useState } from "react";
 import { Box, Button, Form} from "react-bulma-components";
+import Router from "next/router";
 
 
 
@@ -31,7 +32,22 @@ export default function patientData() {
   };
 
   console.log(data);
- 
+
+  if(session.user){
+
+    fetch("/api/bills", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    console.log(data);
+
+
+  }
+   Router.push("/");
 
   };
 

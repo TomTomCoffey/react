@@ -22,8 +22,11 @@ export interface User{
 
 }
 
-export function login(user: User) {
+export function login()  {
     session.user = users[0];
+    console.log(session.user);
+
+   
 
     }
 
@@ -31,17 +34,29 @@ export function logout() {
     session.user = null;
 }
 
-const users: User[] = [
+ export const users: User[] = [
     {
        id: 1,
         name: "John Doe",
         email: "John@doe.com",
         password: "1234321",
-        bills: []
+        bills: [
+            {
+                id: 1,
+                patentName: "John Doe",
+                email: "",
+                address: "",
+                hospitalName: "",
+                dateOfService: "",
+                amount: "",
+                bill: "",
+            },
+        ]
        
     }
 
 ]
+
 
 
 
