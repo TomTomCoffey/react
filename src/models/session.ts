@@ -70,6 +70,11 @@ export function logout() {
     session.user!.bills.splice(index, 1);
     }
 
+  export function backToEdit(){
+
+    session.user!.bills.pop();
+  }
+
 
 
 

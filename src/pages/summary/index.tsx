@@ -1,4 +1,4 @@
-import { useSession } from "@/models/session";
+import { useSession, backToEdit } from "@/models/session";
 import Router from "next/router"
 import React from "react";
 import { Block, Box, Button } from "react-bulma-components"
@@ -7,7 +7,10 @@ export default function Summary() {
 
     const session = useSession();
 
-    //const summary = session.user?.bills[bills.length-1]
+    if(!session.user){
+        Router.push("/login");
+    }
+
 
     function confirm(){
         Router.push("/")
@@ -15,7 +18,7 @@ export default function Summary() {
 
     function edit(){
 
-       
+        backToEdit();
         Router.push("/products")
     }
 

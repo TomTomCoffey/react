@@ -10,11 +10,6 @@ import router, { Router } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 
-
-
-
-
-
 export default function Home() {
 
   const session = useSession();

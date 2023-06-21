@@ -1,14 +1,15 @@
-import { useSession } from "@/models/session";
+import { addBill, useSession } from "@/models/session";
 import { useState } from "react";
 import { Box, Button, Form} from "react-bulma-components";
 import Router from "next/router";
+import type {Bill} from "@/models/bills";
+import router from "next/router";
 
 
 
 export default function patientData() {
 
   const session = useSession();
-
   
   const [patientName, setPatientName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,7 +17,8 @@ export default function patientData() {
   const [hospitalName, setHospitalName] = useState("");
   const [dateOfService, setDateOfService] = useState("");
   const [amount, setAmount] = useState("");
-  const [bill, setBill] = useState("");
+  const [filebase64,setFileBase64] = useState<string>("")
+ 
 
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -28,37 +30,45 @@ export default function patientData() {
       hospitalName,
       dateOfService,
       amount,
-      bill,
-  };
+      filebase64,
+    } as unknown as Bill;
 
-  console.log(data);
-
-  if(session.user){
-
-    fetch("/api/bills", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-
+    addBill(data);
+    console.log("data");
     console.log(data);
 
 
-  }
+  console.log(data);
    Router.push("/summary");
 
   };
 
 
 if(!session.user){
-  Router.push("/login");
+  router.push("/login");
+}
+
+
+function convertFile(files: FileList|null) {
+  if (files) {
+    const fileRef = files[0] || ""
+    const fileType: string= fileRef.type || ""
+    console.log("This file upload is of type:",fileType)
+    const reader = new FileReader()
+    reader.readAsBinaryString(fileRef)
+    reader.onload=(ev: any) => {
+      // convert it to base64
+      setFileBase64(`data:${fileType};base64,${btoa(ev.target.result)}`)
+    }
+  }
 }
 
 
 
 return (
+
+
+  
 
 
   <>
@@ -110,10 +120,11 @@ return (
         <Form.Field>
           <Form.Label>Upload Bill</Form.Label>
           <Form.Control>
-            <Form.Input type="file" placeholder="Upload Bill"  onChange={(e) => setBill(e.target.value)} />
+            <Form.Input type="file" name="file" placeholder="Upload Bill" onChange={(e)=> convertFile(e.target.files)}  />
           </Form.Control>
         </Form.Field>
 
+      
 
         <Button.Group align="right">
           <Button color="primary"  onClick={handleSubmit}>Submit</Button>
