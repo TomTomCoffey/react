@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import { useSession } from '@/models/session'
 import { Button } from 'react-bulma-components'
 import { useState } from 'react'
+import router, { Router } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,6 +26,12 @@ export default function Home() {
 const handleToggle = () => {
   setVisible((current) => !current);
 };
+
+   if(!session.user){
+     router.push("/login");
+    
+
+   }
 
 
   if(!visible){

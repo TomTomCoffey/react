@@ -1,6 +1,10 @@
 import { login, logout, useSession } from "@/models/session";
+import router, { Router } from "next/router";
 import { useState } from "react";
 import { Button } from "react-bulma-components";
+
+
+
 
 
 
@@ -8,13 +12,25 @@ export default function loginBadge(){
 
     const session = useSession();
 
+    function log(){
+
+        router.push("/login");
+    }
+
+    function out(){
+        logout();
+        router.push("/login");
+    }
+    
+    
+
 
 
 if(!session.user){
     
     return(
         <>
-        <Button color="info" onClick={login}>Login</Button>
+        <Button color="info" onClick={log}>Login</Button>
     
 
     </>
@@ -24,7 +40,7 @@ if(!session.user){
 
    return(
     <>
-   <Button color="danger" onClick={logout}>LogOut</Button>
+   <Button color="danger" onClick={out}>LogOut</Button>
     </>
    )
 

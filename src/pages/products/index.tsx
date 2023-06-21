@@ -52,9 +52,15 @@ export default function patientData() {
   };
 
 
+if(!session.user){
+  Router.push("/login");
+}
+
 
 
 return (
+
+
   <>
       <Box style={{ width: 400, margin: 'auto', }}>
       <form>
