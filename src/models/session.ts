@@ -19,6 +19,7 @@ export interface User{
     email: string,
     password: string,
     bills: Bill[],
+   
 
 }
 
@@ -43,15 +44,18 @@ export function logout() {
         bills: [
             {
                 id: 1,
-                patentName: "John Doe",
+                pName: "John Doe",
                 email: "",
                 address: "",
                 hospitalName: "",
                 dateOfService: "",
                 amount: "",
-                bill: "",
+                filebase64: "",
+                
             },
+          
         ]
+        
        
     }
 
@@ -62,6 +66,11 @@ export function logout() {
 
 
   export function addBill(bill: Bill) {
+
+    // console.log(bill);
+
+    // console.log("inside addBill");
+    // console.log(bill.pName);
     session.user!.bills.push(bill);
   }
 

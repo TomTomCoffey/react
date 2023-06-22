@@ -1,4 +1,4 @@
-import { useSession, login } from "@/models/session";
+import { useSession, login, users } from "@/models/session";
 import router, { Router } from "next/router";
 import { Box, Button, Form } from "react-bulma-components";
 
@@ -7,7 +7,10 @@ export default function Login() {
 
     const session = useSession();
 
+    const user = users[0];
+
     function loggingin(){
+      
         login();
         router.push("/");
     }

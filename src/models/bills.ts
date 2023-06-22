@@ -2,13 +2,14 @@
 
 export interface Bill{
     id: number,
-    patentName: string,
+    pName: string,
     email: string,
     address: string,
     hospitalName: string,
     dateOfService: string,
     amount: string,
-    bill: string,
+    filebase64: string,
+
 
 
 }

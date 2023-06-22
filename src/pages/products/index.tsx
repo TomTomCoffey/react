@@ -9,9 +9,17 @@ import router from "next/router";
 
 export default function patientData() {
 
+
+
   const session = useSession();
+
+  // if(!session.user){
+  //   router.push("/login");
+  // }
   
-  const [patientName, setPatientName] = useState("");
+
+
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [hospitalName, setHospitalName] = useState("");
@@ -20,17 +28,20 @@ export default function patientData() {
   const [filebase64,setFileBase64] = useState<string>("")
  
 
+  console.log(name);
+
   const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     console.log("submitted");
     const data = {
-      patientName,
+      pName: name,
       email,
       address,
       hospitalName,
       dateOfService,
       amount,
       filebase64,
+   
     } as unknown as Bill;
 
     addBill(data);
@@ -38,15 +49,12 @@ export default function patientData() {
     console.log(data);
 
 
-  console.log(data);
    Router.push("/summary");
 
   };
 
 
-if(!session.user){
-  router.push("/login");
-}
+
 
 
 function convertFile(files: FileList|null) {
@@ -63,11 +71,16 @@ function convertFile(files: FileList|null) {
   }
 }
 
+// if(!session.user){
+
+//   router.push("/login");
+//   return null;
+// }
 
 
 return (
 
-
+   
   
 
 
@@ -77,7 +90,7 @@ return (
         <Form.Field>
           <Form.Label>Patient Name</Form.Label>
           <Form.Control>
-            <Form.Input  type="name" placeholder="John Doe"  onChange={(e) => setPatientName(e.target.value)}/>
+            <Form.Input  type="address" placeholder="John Doe"  onChange={(e) => setName(e.target.value)}/>
           </Form.Control>
         </Form.Field>
 
@@ -113,7 +126,7 @@ return (
         <Form.Field>
           <Form.Label>Amount</Form.Label>
           <Form.Control>
-            <Form.Input type="amount" placeholder="Amount"  onChange={(e) => setAmount(e.target.value)} />
+            <Form.Input type="number" placeholder="Amount"  onChange={(e) => setAmount(e.target.value)} />
           </Form.Control>
         </Form.Field>
 
@@ -131,6 +144,8 @@ return (
         </Button.Group>
       </form>
     </Box>
+
+
   </>
 )
 

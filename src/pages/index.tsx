@@ -3,11 +3,27 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useSession } from '@/models/session'
-import { Button } from 'react-bulma-components'
+import { Box, Button } from 'react-bulma-components'
 import { useState } from 'react'
 import router, { Router } from 'next/router'
 
 const inter = Inter({ subsets: ['latin'] })
+
+
+function useBase64StringToBlob(base64String: string) {
+  const byteString = atob(base64String.split(',')[1]);
+  const mimeString = base64String.split(',')[0].split(':')[1].split(';')[0];
+  const arrayBuffer = new ArrayBuffer(byteString.length);
+  const intArray = new Uint8Array(arrayBuffer);
+  for (let i = 0; i < byteString.length; i++) {
+    intArray[i] = byteString.charCodeAt(i);
+  }
+  const blob = new Blob([intArray], { type: mimeString });
+  return blob;
+}
+
+
+
 
 
 export default function Home() {
@@ -16,17 +32,34 @@ export default function Home() {
 
   const bills = session.user?.bills ?? [];
 
+ console.log(session.user);
+
   const [visible, setVisible] = useState(false);
 
 const handleToggle = () => {
   setVisible((current) => !current);
 };
 
-   if(!session.user){
-     router.push("/login");
+  const [viewBill, setViewBill] = useState(false);
+
+  const handleViewBill = () => {
+    setViewBill((current) => !current);
+
+    return (
+      <>
+        <h2 className="subtitle">
+          hello
+        </h2>
+      </>
+    )
+  };
+
+
+  //  if(!session.user){
+  //    router.push("/login");
     
 
-   }
+  //  }
 
 
   if(!visible){
@@ -101,9 +134,27 @@ const handleToggle = () => {
                 </div>
                 <div className="content">
                 <ul>
+
+                  
                   {bills.map((bill) => (
                     <li key={bill.id}>
-                      <a href={`/bills/${bill.patentName}`}>{}</a>
+
+                      <Box style={{ width: 400, margin: 'auto', }}>
+                      <p> Patient Name: <strong> {bill.pName} </strong> </p>
+                      <p> Email: <strong> {bill.email} </strong></p>
+                      <p> Address: <strong> {bill.address} </strong> </p>
+                      <p> Hospital Name: <strong> {bill.hospitalName} </strong> </p>
+                      <p> Date of Service: <strong> {bill.dateOfService} </strong></p>
+                      <p> Amount:  <strong>$ {bill.amount} </strong> </p>
+                      <p> Bill:   {/* if it's an image */ }
+                      { <img src={bill.filebase64} alt="uploaded" /> }
+                      </p>   
+                      <div className="card-footer">
+                        <span>
+                          <Button color="info" onClick={handleViewBill} >View Bill Photo</Button>
+                        </span>
+                      </div>
+                      </Box>
                     </li>
                   ))}
                 </ul>

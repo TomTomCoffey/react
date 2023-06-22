@@ -7,9 +7,17 @@ export default function Summary() {
 
     const session = useSession();
 
-    if(!session.user){
-        Router.push("/login");
-    }
+
+    // if(!session.user){
+    //     Router.push("/login");
+    // }
+
+    const bill = session.user?.bills[session.user?.bills.length - 1];
+
+
+    console.log(bill?.email);
+    console.log(bill?.address);
+    console.log(bill?.pName);
 
 
     function confirm(){
@@ -41,13 +49,17 @@ export default function Summary() {
                         <p></p>
                        
                     <ul>
-                        <li> Patient Name: {}  </li>
-                        <li> Email:  {}</li>
-                        <li> Address: {} </li>
-                        <li> Hospital Name: {} </li>
-                        <li> Date of Service: {} </li>
-                        <li> Amount: {} </li>
-                        <li> Bill: {} </li>
+                        <li> Patient Name: <strong> {bill?.pName} </strong> </li>
+                        <li> Email: <strong> {bill?.email} </strong></li>
+                        <li> Address: <strong> {bill?.address} </strong> </li>
+                        <li> Hospital Name: <strong> {bill?.hospitalName} </strong> </li>
+                        <li> Date of Service: <strong> {bill?.dateOfService} </strong></li>
+                        <li> Amount: <strong> {bill?.amount} </strong> </li>
+                        <li> Bill:   {/* if it's an image */ }
+                        { <img src={bill?.filebase64} width={300} alt="Uploaded" />}
+                        {/* if it's a pdf */}
+                        {<img src={`data:image/jpeg;base64,${bill?.filebase64}`} />}
+                        </li>
                         <p></p>
                         <p></p>
                         
