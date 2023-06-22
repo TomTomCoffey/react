@@ -21,17 +21,17 @@ export default function Login() {
            <Box style={{ width: 400, margin: 'auto', }}>
       <form>
         <Form.Field>
-          <Form.Label>Patient Name</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control>
-            <Form.Input  type="name" placeholder="John Doe"  />
+            <Form.Input  type="email" placeholder="John Doe"  />
           </Form.Control>
         </Form.Field>
 
 
         <Form.Field>
-          <Form.Label>Email</Form.Label>
+          <Form.Label>Password</Form.Label>
           <Form.Control>
-            <Form.Input type="email" placeholder="john@doe.com"  />
+            <Form.Input type="password" placeholder="***********"  />
           </Form.Control>
         </Form.Field>
 

@@ -71,11 +71,11 @@ function convertFile(files: FileList|null) {
   }
 }
 
-// if(!session.user){
+if(!session.user){
 
-//   router.push("/login");
-//   return null;
-// }
+  router.push("/login");
+  return null;
+}
 
 
 return (

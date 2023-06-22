@@ -26,7 +26,7 @@ export default function Nav() {
           <div className="navbar-start">
 
             <Link href="/" className="navbar-item">Home</Link>
-            <Link href="/summary" className="navbar-item">Summary</Link>
+            {/* <Link href="/summary" className="navbar-item">Summary</Link> */}
             <Link href="/products" className="navbar-item">Submit Bill</Link>
          
 

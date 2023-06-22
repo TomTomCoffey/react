@@ -42,17 +42,7 @@ export function logout() {
         email: "John@doe.com",
         password: "1234321",
         bills: [
-            {
-                id: 1,
-                pName: "John Doe",
-                email: "",
-                address: "",
-                hospitalName: "",
-                dateOfService: "",
-                amount: "",
-                filebase64: "",
-                
-            },
+         
           
         ]
         

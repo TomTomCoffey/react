@@ -41,11 +41,11 @@ const handleToggle = () => {
   };
 
 
-  //  if(!session.user){
-  //    router.push("/login");
+   if(!session.user){
+     router.push("/login");
     
 
-  //  }
+   }
 
 
   if(!visible){
@@ -126,6 +126,13 @@ const handleToggle = () => {
                     <li key={bill.id}>
 
                       <Box style={{ width: 400, margin: 'auto', }}>
+                      <div className="card-header">
+                        <p className="card-header-title">
+                          Billing info
+                        </p>
+                   
+                      </div>
+                      <br></br>
                       <p> Patient Name: <strong> {bill.pName} </strong> </p>
                       <p> Email: <strong> {bill.email} </strong></p>
                       <p> Address: <strong> {bill.address} </strong> </p>
@@ -139,9 +146,9 @@ const handleToggle = () => {
 
                       </p>   
                       <div className="card-footer">
-                        <span>
+                        {/* <span>
                           <Button color="info" onClick={handleViewBill} >View Bill Photo</Button>
-                        </span>
+                        </span> */}
                       </div>
                       </Box>
                     </li>
