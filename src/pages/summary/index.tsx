@@ -56,9 +56,8 @@ export default function Summary() {
                         <li> Date of Service: <strong> {bill?.dateOfService} </strong></li>
                         <li> Amount: <strong> {bill?.amount} </strong> </li>
                         <li> Bill:   {/* if it's an image */ }
-                        { <img src={bill?.filebase64} width={300} alt="Uploaded" />}
+                        { <embed src={bill?.filebase64} type="application/pdf" width="100%" height="600px" /> }
                         {/* if it's a pdf */}
-                        {<img src={`data:image/jpeg;base64,${bill?.filebase64}`} />}
                         </li>
                         <p></p>
                         <p></p>

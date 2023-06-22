@@ -10,20 +10,6 @@ import router, { Router } from 'next/router'
 const inter = Inter({ subsets: ['latin'] })
 
 
-function useBase64StringToBlob(base64String: string) {
-  const byteString = atob(base64String.split(',')[1]);
-  const mimeString = base64String.split(',')[0].split(':')[1].split(';')[0];
-  const arrayBuffer = new ArrayBuffer(byteString.length);
-  const intArray = new Uint8Array(arrayBuffer);
-  for (let i = 0; i < byteString.length; i++) {
-    intArray[i] = byteString.charCodeAt(i);
-  }
-  const blob = new Blob([intArray], { type: mimeString });
-  return blob;
-}
-
-
-
 
 
 export default function Home() {
@@ -147,7 +133,10 @@ const handleToggle = () => {
                       <p> Date of Service: <strong> {bill.dateOfService} </strong></p>
                       <p> Amount:  <strong>$ {bill.amount} </strong> </p>
                       <p> Bill:   {/* if it's an image */ }
-                      { <img src={bill.filebase64} alt="uploaded" /> }
+                   
+                      {/* if it's a pdf */ }
+                      { <embed src={bill.filebase64} type="application/pdf" width="100%" height="600px" /> }
+
                       </p>   
                       <div className="card-footer">
                         <span>
